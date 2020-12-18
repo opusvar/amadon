@@ -21,7 +21,5 @@ class Order(models.Model):
 class User_Order(models.Model):
     total_spending = Order.objects.aggregate(Sum('total_price'))
 
-    def __repr__(self):
-        return f"User_Order Object: {self.id} | {self.total_spending}"
 
     
