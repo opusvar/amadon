@@ -20,9 +20,7 @@ def checkout(request):
     quantity_from_form = request.session["quantity"]
     price_from_form = request.session["total_charge"]
     total_charge = request.session["total_charge"]
-    total_spent = 0
-    for Order.total_price in Order.objects.all():
-        print(Order.total_price)
+    total_spent = round(User_Order.total_spending, 2)
     context = {
         "quantity_from_form" : quantity_from_form,
         "price_from_form" : price_from_form,

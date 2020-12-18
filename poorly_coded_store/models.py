@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Sum
 class Product(models.Model):
     description = models.CharField(max_length=45)
     price = models.DecimalField(decimal_places=2, max_digits=5)
@@ -19,7 +19,9 @@ class Order(models.Model):
         return f"Order Object: id: {self.id} | quantity_ordered: {self.quantity_ordered} | total price {self.total_price}"
 
 class User_Order(models.Model):
-    total_spending = models.DecimalField(decimal_places=2, max_digits=6)
-    
+    total_spending = Order.objects.aggregate(Sum('total_price'))
+
     def __repr__(self):
-        return f"<User_Order Object: id: {self.id} | total_spending: {self.total_spending} | "
+        return f"User_Order Object: {self.id} | {self.total_spending}"
+
+    
